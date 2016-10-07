@@ -1,7 +1,7 @@
 Package: SimulateBML
 Type: Package
 Title: Biham-Middleton-Levine Traffic Model Simulation
-Version: 0.3.5
+Version: 0.2.5
 Authors@R: person("Tianxia", "Zhou", email = "tianxiazhou@gmail.com", role = c("aut", "cre"))
 Description: Tools to simulate Biham-Middleton-Levine Traffic Model where the grid is filled with blue and red cars. The blue cars moves up and the red cars moves right. And the goal of the simulation is to find how and at what density of the cars will congestion happen.
 License: BSD
