@@ -1,6 +1,3 @@
-# Appendix D
-# functions in package
-
 # Methods for class "BML" ####
 summary.BML = function(object, ...) {
   BML.Grid = object
