@@ -8,9 +8,9 @@ output: html_document
 library(SimulateBML)
 ```
 
-This is mean to assess the performance of the two implementation of the main code in my package. User of this package should prefer **crunBMLGrid()**.
-**crunBMLGrid()** calls C routines and it is offering the same functionality with **runBMLGrid()**.
-The **runBMLGrid()** is implemented using only R and thus slower.
+This is mean to assess the performance of the two different implementation of the main code in my package.
+**crunBMLGrid()** calls C routines and it called in method such as **plotBMLPhases()**.
+**runBMLGrid()** is implemented using only R and thus slower. It is the initial implementation. And it is not included in the name space and thus hidden from user.
 
 ## Key findings
 
@@ -35,7 +35,7 @@ From the plot below we can see as the size of the grid increases, the run time i
 It seems like a linear relationship between the size of the grid and the run time.
 
 ```{r}
-test.r1 = SimulateBML::plotPerformanceDim(run.function = SimulateBML::runBMLGrid)
+test.r1 = SimulateBML::plotPerformanceDim(run.function = SimulateBML:::runBMLGrid)
 ```
 
 ### Run time by different densities ("**runBMLGrid()**")
@@ -48,7 +48,7 @@ We probably can fit a linear line but the relationship between the density of th
 We can see there are a lot of noise in the plot.
 
 ```{r}
-test.r2 = SimulateBML::plotPerformanceDen(run.function = SimulateBML::runBMLGrid)
+test.r2 = SimulateBML::plotPerformanceDen(run.function = SimulateBML:::runBMLGrid)
 ```
 
 ## Performance of the "**crunBMLGrid()**" function

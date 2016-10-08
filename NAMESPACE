@@ -1,6 +1,6 @@
 #exportPattern(".*")
 
-export(createBMLGrid, runBMLGrid, velocityBMLGrid, crunBMLGrid,
+export(createBMLGrid, velocityBMLGrid, crunBMLGrid,
        plotBMLPhases, plotBMLVelocities,
        timingGrid, plotPerformanceDim, plotPerformanceDen)
 

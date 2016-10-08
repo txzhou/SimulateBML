@@ -1,7 +1,7 @@
 # Phase transition and average velocities
 plotBMLPhases = function(rows = 100, cols = 99, density, numSteps = 2000) {
   g = createBMLGrid(r = rows, c = cols, rho = density)
-  g.out = runBMLGrid(g, numSteps = numSteps)
+  g.out = crunBMLGrid(g, numSteps = numSteps)
   v0 = format(x = velocityBMLGrid(g), digits = 3)
   vt = format(x = velocityBMLGrid(g.out), digits = 3)
   par(mfcol = c(1,2))
