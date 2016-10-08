@@ -1,15 +1,17 @@
 ---
-title: 'Code performance'
-author: 'Tianxia Zhou'
-date: "`r Sys.Date()`"
-output: html_document
+title: "Code performance"
+author: "Tianxia Zhou"
+date: '`r Sys.Date()`'
+output: pdf_document
 ---
 ```{r, include=FALSE}
 library(SimulateBML)
 ```
 
 This is mean to assess the performance of the two different implementation of the main code in my package.
+
 **crunBMLGrid()** calls C routines and it called in method such as **plotBMLPhases()**.
+
 **runBMLGrid()** is implemented using only R and thus slower. It is the initial implementation. And it is not included in the name space and thus hidden from user.
 
 ## Key findings

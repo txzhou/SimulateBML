@@ -1,8 +1,8 @@
 ---
 title: "Phases in BML traffic model"
 author: "Tianxia Zhou"
-date: "`r Sys.Date()`"
-output: html_document
+date: '`r Sys.Date()`'
+output: pdf_document
 ---
 ```{r, include=FALSE}
 library(SimulateBML)
