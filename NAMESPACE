@@ -1,6 +1,8 @@
 #exportPattern(".*")
 
-export(createBMLGrid, runBMLGrid, velocityBMLGrid, crunBMLGrid, plotBMLPhases, plotBMLVelocities, timingGrid, plotPerformanceDim, plotPerformanceDen)
+export(createBMLGrid, runBMLGrid, velocityBMLGrid, crunBMLGrid,
+       plotBMLPhases, plotBMLVelocities,
+       timingGrid, plotPerformanceDim, plotPerformanceDen)
 
 S3method(plot, BML)
 S3method(summary, BML)
