@@ -1,0 +1,87 @@
+---
+title: "Phases in BML traffic model"
+author: "Tianxia Zhou"
+date: "`r Sys.Date()`"
+output: html_document
+---
+```{r, include=FALSE}
+library(SimulateBML)
+```
+
+The BML traffic model displays intresting patterns when the density of the cars in the grid changes.
+
+# Key findings
+
+  * As density of the cars changes, 3 phases show up.
+  The 3 phases are different in the graphic patterns of the cars as well as the trajectory of the average velocities of the cars.
+  
+  * The transition points for a $100 \times 99$ grid are around 0.33 and 0.41.
+  Due to the stocastic nature of the problem these transition points are not exact.
+  
+  * The change of the shape of the grid doesn't affect the above result qualitatively.
+
+
+# Behavior of the BML model
+## Phase transition and average velocities
+
+I took a $100 \times 99$ grid as an example to illustrate the different phases in the BML transition model and provide a general idea of what are the phases and when does the transition happen. Velocity is measured as an average velocity of red cars and blue cars weighted by the fraction of these two cars.
+
+
+
+### What are the phases?
+
+I specify different densities for the grid and run the simulation for 10000 steps each time.
+And then for each of the simulation I plot the BML grids for staring point and ending point and measures the average velocities for those two time points.
+For density I did a grid search from 0.2 to 0.7 (graphs not included) I can clearly see three phases. Graphically we notice:
+
+  1. When the density is below 0.33, the cars in the grid self organized to a pattern in which they are not interfering with each other and the average velocity raises to very close to 1 (full speed).
+  Below the graphs with density equals 0.3 illustrate this phase.
+
+  2. When the density is over 0.41, the cars in the grid drive themselves into a congestion and the average velocity falls to 0 (no car is moving).
+  Below the graphs with density equals 0.5 illustrate this phase.
+
+  3. When the density is about 0.34-0.4, the cars in the grid self organized to a pattern in which there are areas of congestion and areas of fluent traffic.
+  The pattern looks like a mix of the two extrem phases.
+  And the average velocity goes to somewhere between 0 and 1.
+  When we looked the patterns changing over time (graphs not included), we notice that the congestion areas are not fixed but floating around over time.  
+  Below the graphs with density equals 0.3 illustrate this phase.
+  
+  
+```{r}
+SimulateBML::plotBMLPhases(density = .3)
+
+```
+
+
+```{r}
+SimulateBML::plotBMLPhases(density = .5)
+
+```
+
+
+```{r}
+SimulateBML::plotBMLPhases(density = .35)
+
+```
+
+### The trajectories of the average velocity of the cars
+
+These trajectories also help to characterize the phases.
+The following graph show three example of the trajectories.
+
+```{r}
+par(mfrow=c(1,3))
+SimulateBML::plotBMLVelocities(density = .3, numSteps = 500, measureEvery = 1)
+SimulateBML::plotBMLVelocities(density = .5, numSteps = 500, measureEvery = 1)
+SimulateBML::plotBMLVelocities(density = .35, numSteps = 500, measureEvery = 1)
+
+```
+
+
+## How does the shape of the grid affect the result
+
+It is suprising that the shape of the grid doesn't seem to change the phase transition dramatically.
+I looked at from $100 \times 10$ grids, $100 \times 20$ grids all the way up to $100 \times 120$ grids.
+And I used the densities of 0.2, 0.4 and 0.6 (the number of red cars equals to the number of blue cars).
+The basic results are the same.
+There are 3 phases for these grids at different densities (graphs not included).
