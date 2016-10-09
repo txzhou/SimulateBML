@@ -1,10 +1,8 @@
-# Appendix E
-# functions in package
-
+# Notes about encoding:
 # // "white" == 0
 # // "red" == 1
 # // "blue" == 2
-# 
+#
 # // "move" == 1
 # // "stay" == 0
 
@@ -33,7 +31,7 @@ MoveMatrix = function(matrix, direction = NULL) {
   if (direction == "up") {
     matrix.out = matrix[c(2:num.row,1), ]
   } else if (direction == "down") {
-    matrix.out = matrix[c(num.row, 1:(num.row-1)), ] 
+    matrix.out = matrix[c(num.row, 1:(num.row-1)), ]
   } else if (direction == "left") {
     matrix.out = matrix[, c(2:num.col,1)]
   } else if (direction == "right") {
@@ -54,7 +52,7 @@ MoveMatrix.down = function(matrix) {
   # this function moves matrix down
   num.row = nrow(matrix)
   num.col = ncol(matrix)
-  matrix.out = matrix[c(num.row, 1:(num.row-1)), ] 
+  matrix.out = matrix[c(num.row, 1:(num.row-1)), ]
   return(matrix.out)
 }
 
@@ -81,7 +79,7 @@ MoveCars = function(BML.Grid, move = "red", velocity = FALSE) {
   matrix.spaces = BML.Grid == 0L
   matrix.red.cars = BML.Grid == 1L
   matrix.blue.cars = BML.Grid == 2L
-  
+
   if (move == "red") {
     matrix.check = MoveMatrix.left(matrix.spaces)
     matrix.move = (matrix.check & matrix.red.cars)  # matrix.move means to do the same thing as matrix.note in the Slower_Vertion. It keeps track of which cars move.
@@ -101,13 +99,13 @@ MoveCars = function(BML.Grid, move = "red", velocity = FALSE) {
     matrix.red.cars.new = matrix.red.cars
     matrix.blue.cars.new = (matrix.moved | matrix.stay)
   }
-  
+
   # Make the new grid
   BML.Grid.out = BML.Grid
   BML.Grid.out[,] = 0L
   BML.Grid.out[matrix.red.cars.new] = 1L
   BML.Grid.out[matrix.blue.cars.new] = 2L
-  
+
   return(BML.Grid.out)
 }
 
@@ -121,13 +119,13 @@ velocityBMLGrid = function(BML.Grid, move.first = "red") {
     move.second = "red"
     move.second.code = 1L
   }
-  
+
   vel1 = MoveCars(BML.Grid = BML.Grid, move = move.first, velocity = TRUE)
   grid.temp = MoveCars(BML.Grid = BML.Grid, move = move.first)
   vel2 = MoveCars(BML.Grid = BML.Grid, move = move.second, velocity = TRUE)
   num.first = sum(BML.Grid == move.first.code)
   num.second = sum(BML.Grid == move.second.code)
-  vel.average = weighted.mean(x = c(vel1, vel2), w = c(num.first, num.second))  
+  vel.average = weighted.mean(x = c(vel1, vel2), w = c(num.first, num.second))
   return(vel.average)
 }
 
@@ -135,18 +133,18 @@ recordVelBML = function(BML.Grid, numSteps = 10000, measureEvery = 10) {
   records.num = as.integer(numSteps/measureEvery)
   v = vector(length = records.num + 1)
   v[1] = format(x = velocityBMLGrid(BML.Grid), digits = 3)
-  
+
   for (i in 1:numSteps) {
     if (i %% measureEvery == 0) {
       n = as.integer(i/measureEvery)
       v[n+1] = format(x = velocityBMLGrid(BML.Grid), digits = 3)
     }
-      
+
     if (i %% 2 == 1)
       BML.Grid = MoveCars(BML.Grid = BML.Grid, move = "red")
     else BML.Grid = MoveCars(BML.Grid = BML.Grid, move = "blue")
   }
-  
+
   df.velocity = cbind(steps = 0:records.num * measureEvery, velocity = v)
   return(df.velocity)
 }
@@ -167,12 +165,12 @@ cmoveCars = function(BML.Grid = BML.Grid, move = "red") {
   r = as.integer(nrow(BML.Grid))
   c = as.integer(ncol(BML.Grid))
   matrix_note = matrix(0L, nrow = r, ncol = c)
-  
+
   if (move == "red")
     Grid.out = .C("move_red", BML.Grid, r, c, matrix_note, BML.Grid)[[5]]
   else if (move == "blue")
     Grid.out = .C("move_blue", BML.Grid, r, c, matrix_note, BML.Grid)[[5]]
-  
+
   return(Grid.out)
 }
 
