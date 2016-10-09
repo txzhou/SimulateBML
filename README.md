@@ -11,6 +11,12 @@ library(devtools)
 devtools::install_github("txzhou/SimulateBML")
 ```
 
+Then it's done!
+To start playing with it, try:
+```R
+SimulateBML::plotBMLPhases(density = .3)
+```
+
 ### Functions in NAMESPACE
 
 The package has S3 methods `plot` and `summary` for the `BML` class.
