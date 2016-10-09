@@ -14,6 +14,7 @@ devtools::install_github("txzhou/SimulateBML")
 Then it's done!
 To start playing with it, try:
 ```R
+library(SimulateBML)
 SimulateBML::plotBMLPhases(density = .3)
 ```
 
