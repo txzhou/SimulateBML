@@ -11,6 +11,18 @@ library(devtools)
 devtools::install_github("txzhou/SimulateBML")
 ```
 
+### Functions in NAMESPACE
+
+The package has S3 methods `plot` and `summary` for the `BML` class.
+
+Other functions include:
+
+* `createBMLGrid`: initialize a BML grid.
+* `velocityBMLGrid`: evaluate the average velocity of a state of a BML grid.
+* `crunBMLGrid`: run BML simulation using C routines.
+* `plotBMLPhases`, `plotBMLVelocities`: functions used to analyze the phases of the BML grids.
+* `timingGrid`, `plotPerformanceDim`, `plotPerformanceDen`: functions used to assess the performance of the code.
+
 ### Example usage
 
 The BML traffic model displays three phases with different initial set up in the grid.
